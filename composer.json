@@ -14,8 +14,9 @@
         }
     ],
     "require": {
-        "omnipay/common": "master",
+        "php": ">=7.1",
         "ext-json": "*",
+        "omnipay/common": "^3.0",
         "php-http/guzzle6-adapter": "^2.0"
     },
     "require-dev": {
