@@ -4,48 +4,17 @@ namespace Omnipay\Tinkoff;
 
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\Tinkoff\Message\NotificationRequest;
 use Omnipay\Tinkoff\Message\PurchaseRequest;
 
-/**
- * Tinkoff Gateway
- * @method \Omnipay\Common\Message\RequestInterface authorize(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface completeAuthorize(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface capture(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface completePurchase(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface refund(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface void(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface fetchTransaction(array $options = [])
- * @method \Omnipay\Common\Message\RequestInterface acceptNotification(array $options = array())
- */
 class Gateway extends AbstractGateway
 {
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'Tinkoff';
-    }
-
-    public function getDefaultParameters()
-    {
-        return [
-            'terminalId' => '',
-            'password' => '',
-
-            'testTerminalId' => '',
-            'testPassword' => '',
-
-            'testMode' => false,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getParameters()
-    {
-        return $this->parameters->all();
     }
 
     /**
@@ -68,30 +37,13 @@ class Gateway extends AbstractGateway
     /**
      * @return string
      */
-    public function getTestTerminalId()
-    {
-        return $this->getParameter('testTerminalId');
-    }
-
-    /**
-     * @param string $value
-     * @return Gateway
-     */
-    public function setTestTerminalId($value)
-    {
-        return $this->setParameter('testTerminalId', $value);
-    }
-
-    /**
-     * @return string
-     */
     public function getPassword()
     {
         return $this->getParameter('password');
     }
 
     /**
-     * @param string $valus
+     * @param string $value
      * @return Gateway
      */
     public function setPassword($value)
@@ -100,30 +52,20 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * @return string
-     */
-    public function getTestPassword()
-    {
-        return $this->getParameter('testPassword');
-    }
-
-    /**
-     * @param string $value
-     * @return Gateway
-     */
-    public function setTestPassword($value)
-    {
-        return $this->setParameter('testPassword', $value);
-    }
-
-    /**
-     * Purchase request
-     *
      * @param array $options
      * @return AbstractRequest
      */
     public function purchase(array $options = [])
     {
         return $this->createRequest(PurchaseRequest::class, $options);
+    }
+
+    /**
+     * @param array $options
+     * @return AbstractRequest
+     */
+    public function acceptNotification(array $options = [])
+    {
+        return $this->createRequest(NotificationRequest::class, $options);
     }
 }
