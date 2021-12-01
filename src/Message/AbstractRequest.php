@@ -2,6 +2,9 @@
 
 namespace Omnipay\Tinkoff\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\Tinkoff\PaymentInterface;
+
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
     const SIGNATURE_KEYS_TO_SKIP = [];
@@ -26,6 +29,28 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function setPassword($value)
     {
         return $this->setParameter('password', $value);
+    }
+
+    public function getPayment(): PaymentInterface
+    {
+        return $this->getParameter('payment');
+    }
+
+    public function setPayment($payment)
+    {
+        if (!$payment instanceof PaymentInterface) {
+            throw new InvalidRequestException('Only PaymentInterface is supported');
+        }
+
+        $this
+            ->setAmount($payment->getAmount())
+            ->setCurrency($payment->getCurrency())
+            ->setDescription($payment->getDescription())
+            ->setReturnUrl($payment->getReturnUrl())
+            ->setTransactionId($payment->getTransactionId())
+            ->setTransactionReference($payment->getTransactionReference());
+
+        return $this->setParameter('payment', $payment);
     }
 
     protected function getEndpoint()
