@@ -1,12 +1,12 @@
 {
-    "name": "mamadogroup/omnipay-tinkoff",
+    "name": "receiver1/omnipay-tinkoff",
     "type": "library",
     "description": "Tinkoff.Payments gateway for Omnipay",
     "keywords": [
         "omnipay",
         "tinkoff"
     ],
-    "homepage": "https://github.com/MAMADOGROUP/omnipay-tinkoff/",
+    "homepage": "https://github.com/Receiver1/omnipay-tinkoff/",
     "license": "MIT",
     "require": {
         "php": ">=7.1",
