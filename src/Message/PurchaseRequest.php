@@ -27,7 +27,6 @@ class PurchaseRequest extends AbstractRequest
             "TerminalKey" => $this->getTerminalId(),
             "Amount" => $this->getAmountInt(),
             "OrderId" => $this->getTransactionId(),
-            "IP" => $this->httpRequest->server->get("SERVER_ADDR"),
             "PayType" => $this->getTwoStagePaymentString(),
         ];
 
