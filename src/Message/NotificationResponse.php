@@ -2,10 +2,10 @@
 
 namespace Omnipay\Tinkoff\Message;
 
-class NotificationResponse extends AbstractResponse
-{
-    public function isSuccessful()
-    {
+use Omnipay\Common\Message\AbstractResponse;
+
+class NotificationResponse extends AbstractResponse {
+    public function isSuccessful() {
         return $this->getRequest()->isValid();
     }
 }
