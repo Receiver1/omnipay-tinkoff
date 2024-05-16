@@ -5,39 +5,32 @@ namespace Omnipay\Tinkoff\Message;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Tinkoff\PaymentInterface;
 
-abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
-{
+abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest {
     const SIGNATURE_KEYS_TO_SKIP = [];
 
     protected $liveEndpoint = 'https://securepay.tinkoff.ru/v2/';
 
-    public function getTerminalId()
-    {
+    public function getTerminalId() {
         return $this->getParameter('terminalId');
     }
 
-    public function setTerminalId($value)
-    {
+    public function setTerminalId($value) {
         return $this->setParameter('terminalId', $value);
     }
 
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->getParameter('password');
     }
 
-    public function setPassword($value)
-    {
+    public function setPassword($value) {
         return $this->setParameter('password', $value);
     }
 
-    public function getPayment(): PaymentInterface
-    {
+    public function getPayment(): PaymentInterface {
         return $this->getParameter('payment');
     }
 
-    public function setPayment($payment)
-    {
+    public function setPayment($payment) {
         if (!$payment instanceof PaymentInterface) {
             throw new InvalidRequestException('Only PaymentInterface is supported');
         }
@@ -53,13 +46,11 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('payment', $payment);
     }
 
-    protected function getEndpoint()
-    {
+    protected function getEndpoint() {
         return $this->liveEndpoint;
     }
 
-    protected function getSignature($data)
-    {
+    protected function getSignature($data) {
         $data["Password"] = $this->getPassword();
 
         ksort($data);

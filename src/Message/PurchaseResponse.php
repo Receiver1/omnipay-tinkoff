@@ -7,39 +7,39 @@ use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface {
-    public function isSuccessful(): bool {
+    public function isSuccessful() {
         return boolval($this->data['Success']);
     }
 
-    public function isRedirect(): bool {
+    public function isRedirect() {
         return true;
     }
 
-    public function getRedirectUrl(): string {
+    public function getRedirectUrl() {
         return $this->data['PaymentURL'];
     }
 
-    public function getRedirectMethod(): string {
+    public function getRedirectMethod() {
         return 'GET';
     }
 
-    public function getTransactionReference(): int|null {
-        return isset($this->data['PaymentId']) ? $this->data['PaymentId'] : null;
+    public function getTransactionReference() {
+        return isset($this->data['PaymentId']) ? intval($this->data['PaymentId']) : null;
     }
 
-    public function getTransactionId(): int|null {
-        return isset($this->data['OrderId']) ? $this->data['OrderId'] : null;
+    public function getTransactionId() {
+        return isset($this->data['OrderId']) ? intval($this->data['OrderId']) : null;
     }
 
-    public function getMessage(): string|null {
+    public function getMessage() {
         return isset($this->data['Message']) ? $this->data['Message'] : null;
     }
 
-    public function getDetailMessage(): string|null {
+    public function getDetailMessage() {
         return isset($this->data['DetailMessage']) ? $this->data['DetailMessage'] : null;
     }
 
-    public function getCode(): int|null {
-        return isset($this->data['ErrorCode']) ? $this->data['ErrorCode'] : null;
+    public function getCode() {
+        return isset($this->data['ErrorCode']) ? intval($this->data['ErrorCode']) : null;
     }
 }

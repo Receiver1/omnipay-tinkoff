@@ -5,8 +5,7 @@ namespace Omnipay\Tinkoff\Message;
 use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\Common\Message\NotificationInterface;
 
-class NotificationRequest extends AbstractRequest implements NotificationInterface
-{
+class NotificationRequest extends AbstractRequest implements NotificationInterface {
     const SIGNATURE_KEYS_TO_SKIP = [
         "Token",
     ];
@@ -18,20 +17,17 @@ class NotificationRequest extends AbstractRequest implements NotificationInterfa
     const NOTIFICATION_STATUS_PARTIAL_REFUNDED = "PARTIAL_REFUNDED";
     const NOTIFICATION_STATUS_REJECTED = "REJECTED";
 
-    public function isValid(): bool
-    {
+    public function isValid(): bool {
         return $this->getSignature($this->getData()) === $this->getData()['Token'];
     }
 
-    public function getData()
-    {
+    public function getData() {
         $body = $this->httpRequest->getContent();
 
         return json_decode($body, true);
     }
 
-    public function getTransactionStatus()
-    {
+    public function getTransactionStatus() {
         $status = $this->getData()['Status'];
 
         switch ($status) {
@@ -48,13 +44,11 @@ class NotificationRequest extends AbstractRequest implements NotificationInterfa
         }
     }
 
-    public function getMessage()
-    {
+    public function getMessage() {
         return null;
     }
 
-    public function sendData($data)
-    {
+    public function sendData($data) {
         try {
             return $this->response = new NotificationResponse($this, $data);
         } catch (\Throwable $e) {
@@ -65,8 +59,7 @@ class NotificationRequest extends AbstractRequest implements NotificationInterfa
         }
     }
 
-    protected function getMethod()
-    {
+    protected function getMethod() {
         return null;
     }
 }
