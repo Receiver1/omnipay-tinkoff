@@ -38,5 +38,5 @@ if (!$response->isSuccessful()) {
 }
 
 $log->write(print_r($response->getData(), true));
-return $response->getPaymentUrl();
+return $response->gitRedirectUrl();
 ```
