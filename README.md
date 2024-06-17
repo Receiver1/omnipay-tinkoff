@@ -7,7 +7,7 @@
 ## Установка
 
 ```bash
-composer require league/omnipay omnipay/tinkoff
+composer require league/omnipay receiver1/omnipay-tinkoff
 ```
 
 ## Использование 
